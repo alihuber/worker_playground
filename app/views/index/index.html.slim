@@ -1,0 +1,23 @@
+h1 Message Test
+
+
+form action="/publish" method="POST"
+  = hidden_field_tag :authenticity_token, form_authenticity_token
+  label for="publish"
+    = "Publish Message:"
+    | &nbsp;
+  input name="publish" id="publish"
+  | &nbsp;
+  | &nbsp;
+  button#publish-button type="submit"
+    | Publish
+
+
+br
+br
+
+| Flood 12 random strings:
+form action="/flood" method="POST"
+  = hidden_field_tag :authenticity_token, form_authenticity_token
+  button#flood-button type="submit"
+    | Flood

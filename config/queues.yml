@@ -1,0 +1,11 @@
+development:
+  queues:
+    - test_queue
+
+test:
+  queues:
+    - test_queue
+
+production:
+  queues:
+    - test_queue
