@@ -6,7 +6,7 @@ class IndexController < ApplicationController
   def publish
     Gundog::Publisher.publish(params["publish"].to_json,
                               to_queue: "test_queue")
-    render :index
+    redirect_to root_path
   end
 
   def flood
@@ -14,6 +14,6 @@ class IndexController < ApplicationController
       string = (0...8).map { (65 + rand(26)).chr }.join
       Gundog::Publisher.publish(string.to_json, to_queue: "test_queue")
     end
-    render :index
+    redirect_to root_path
   end
 end
