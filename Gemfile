@@ -27,7 +27,7 @@ gem 'puma'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "gundog", path: "~/git/gundog"
+gem "gundog", git: "https://github.com/alihuber/gundog.git"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,1 +1,1 @@
-Gundog.setup(amqp: "amqp://ubuntu:ubuntu@11.48.10.108", vhost: "test")
+Gundog.setup(amqp: "amqp://guest:guest@rabbitmq:5672", vhost: "/")

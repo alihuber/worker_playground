@@ -19,16 +19,18 @@ development: &development
   encoding: unicode
   database: worker_playground_development
   pool: 6
-  username: alexander
+  username: postgres
   password:
+  host: db
 
 test:
   adapter: postgresql
   encoding: unicode
   database: worker_playground_test
   pool: 6
-  username: alexander
+  username: postgres
   password:
+  host: db
 
 production:
   <<: *development

@@ -1,0 +1,39 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    volumes_from:
+      - dbstore
+    depends_on:
+      - dbstore
+  webapp:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/worker_playground
+    ports:
+      - "3000:3000"
+    links:
+      - db
+      - rabbitmq
+    depends_on:
+      - db
+      - rabbitmq
+  dbstore:
+    image: postgres
+    volumes:
+      - /var/lib/postgresql
+    command: bin/true
+  rabbitmq:
+    image: rabbitmq:3.5.7-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes_from:
+      - rabbitmqstore
+    depends_on:
+      - rabbitmqstore
+  rabbitmqstore:
+    image: rabbitmq:3.5.7-management
+    volumes:
+      - /var/lib/rabbitmq/mnesia
