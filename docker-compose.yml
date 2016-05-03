@@ -29,11 +29,6 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    volumes_from:
-      - rabbitmqstore
-    depends_on:
-      - rabbitmqstore
-  rabbitmqstore:
-    image: rabbitmq:3.5.7-management
+    hostname: rabbitmq
     volumes:
-      - /var/lib/rabbitmq/mnesia
+      - ~/mnesia:/var/lib/rabbitmq/mnesia
