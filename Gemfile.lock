@@ -1,11 +1,11 @@
 PATH
-  remote: ~/test/gundog
+  remote: ~/git/gundog
   specs:
-    gundog (0.1.0)
-      bunny (~> 2.3.1)
-      celluloid (~> 0.17.3)
+    gundog (0.0.1)
+      bunny (~> 2.3)
+      celluloid (~> 0.17)
       rails (= 4.2.6)
-      serverengine (~> 1.6.3)
+      serverengine (~> 1.6)
 
 GEM
   remote: https://rubygems.org/
