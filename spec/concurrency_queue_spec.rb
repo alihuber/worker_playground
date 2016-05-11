@@ -4,8 +4,8 @@ describe "concurrency queue actions" do
   context "no datasets are present" do
     it "does nothing" do
       expect {
-        Gundog::Publisher.publish([1, "foo"].to_json,
-                                  to_queue: "concurrency_queue")
+        Gundog::Publisher.new.publish([1, "foo"].to_json,
+                                      to_queue: "concurrency_queue")
         sleep(2)
       }.not_to change { Dataset.count }
     end
@@ -19,11 +19,12 @@ describe "concurrency queue actions" do
 
     it "updates all records correctly" do
       (1..10).each do |i|
-        Gundog::Publisher.publish([i, "Address_#{i}"].to_json,
-                                  to_queue: "concurrency_queue")
+        Gundog::Publisher.new.publish([i, "Address_#{i}"].to_json,
+                                      to_queue: "concurrency_queue")
       end
 
-      sleep(2)
+      # wait for worker
+      sleep(3)
 
       (1..10).each do |i|
         dataset = Dataset.find(i)
@@ -37,13 +38,14 @@ describe "concurrency queue actions" do
 
     it "will not raise an error, last message will win" do
       id = dataset_1.id
-      Gundog::Publisher.publish([id, "new_address_1"].to_json,
-                                to_queue: "concurrency_queue")
-      Gundog::Publisher.publish([id, "new_address_2"].to_json,
-                                to_queue: "concurrency_queue")
-      Gundog::Publisher.publish([id, "new_address_3"].to_json,
-                                to_queue: "concurrency_queue")
-      sleep(2)
+      Gundog::Publisher.new.publish([id, "new_address_1"].to_json,
+                                    to_queue: "concurrency_queue")
+      Gundog::Publisher.new.publish([id, "new_address_2"].to_json,
+                                    to_queue: "concurrency_queue")
+      Gundog::Publisher.new.publish([id, "new_address_3"].to_json,
+                                    to_queue: "concurrency_queue")
+      # wait for worker
+      sleep(3)
 
       expect(dataset_1.reload.address).to eq "new_address_3"
     end
