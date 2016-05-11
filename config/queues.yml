@@ -2,13 +2,16 @@ development:
   queues:
     - test_queue
     - concurrency_queue
+    - republish
 
 test:
   queues:
     - test_queue
     - concurrency_queue
+    - republish
 
 production:
   queues:
     - test_queue
     - concurrency_queue
+    - republish
