@@ -5,7 +5,9 @@ class TestQueueWorker < Gundog::ApplicationWorker
     if i == 2
       raise RuntimeError, "Error!"
     else
-      puts "#{Time.zone.now.to_s}  processing #{json} with object #{self.object_id}"
+      puts "#{Time.zone.now.to_s}  processing #{json} with "\
+        "object #{self.object_id}"
     end
   end
+
 end

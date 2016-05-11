@@ -28,12 +28,15 @@ gem 'puma'
 # gem 'capistrano-rails', group: :development
 
 gem "gundog", git: "https://github.com/alihuber/gundog.git"
+# gem "gundog", path: "~/git/gundog"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug'
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem "capybara"
+  gem "database_cleaner"
 end
 
 group :development do

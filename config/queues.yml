@@ -1,11 +1,14 @@
 development:
   queues:
     - test_queue
+    - concurrency_queue
 
 test:
   queues:
     - test_queue
+    - concurrency_queue
 
 production:
   queues:
     - test_queue
+    - concurrency_queue
