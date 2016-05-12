@@ -4,8 +4,9 @@ describe "concurrency queue actions" do
   context "no datasets are present" do
     it "does nothing" do
       expect {
-        Gundog::Publisher.new.publish([1, "foo"].to_json,
-                                      to_queue: "concurrency_queue")
+        Gundog::Publisher.new
+          .publish([1, "foo"].to_json,
+                   to_queue: "concurrency_queue_worker_queue")
         sleep(2)
       }.not_to change { Dataset.count }
     end
@@ -19,8 +20,9 @@ describe "concurrency queue actions" do
 
     it "updates all records correctly" do
       (1..10).each do |i|
-        Gundog::Publisher.new.publish([i, "Address_#{i}"].to_json,
-                                      to_queue: "concurrency_queue")
+        Gundog::Publisher.new
+          .publish([i, "Address_#{i}"].to_json,
+                   to_queue: "concurrency_queue_worker_queue")
       end
 
       # wait for worker
@@ -39,11 +41,11 @@ describe "concurrency queue actions" do
     it "will not raise an error, last message will win" do
       id = dataset_1.id
       Gundog::Publisher.new.publish([id, "new_address_1"].to_json,
-                                    to_queue: "concurrency_queue")
+                                    to_queue: "concurrency_queue_worker_queue")
       Gundog::Publisher.new.publish([id, "new_address_2"].to_json,
-                                    to_queue: "concurrency_queue")
+                                    to_queue: "concurrency_queue_worker_queue")
       Gundog::Publisher.new.publish([id, "new_address_3"].to_json,
-                                    to_queue: "concurrency_queue")
+                                    to_queue: "concurrency_queue_worker_queue")
       # wait for worker
       sleep(3)
 

@@ -12,7 +12,7 @@ describe "republish with altered data to update" do
 
       dataset_ids.each do |id|
         Gundog::Publisher.new
-          .publish(id.to_json, to_queue: "republish")
+          .publish(id.to_json, to_queue: "republish_worker_queue")
       end
 
       # wait for worker
