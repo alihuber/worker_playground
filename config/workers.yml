@@ -1,0 +1,14 @@
+workers: &workers
+  - test_queue_worker
+  - concurrency_queue_worker
+  - republish_worker
+
+
+development:
+  workers: *workers
+
+test:
+  workers: *workers
+
+production:
+  workers: *workers
