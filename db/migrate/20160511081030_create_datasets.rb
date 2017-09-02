@@ -1,4 +1,4 @@
-class CreateDatasets < ActiveRecord::Migration
+class CreateDatasets < ActiveRecord::Migration[5.1]
   def change
     create_table :datasets do |t|
 

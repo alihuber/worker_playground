@@ -1,39 +1,23 @@
-# PostgreSQL. Versions 8.2 and up are supported.
+# SQLite version 3.x
+#   gem install sqlite3
 #
-# Install the pg driver:
-#   gem install pg
-# On OS X with Homebrew:
-#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
-# On OS X with MacPorts:
-#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
-# On Windows:
-#   gem install pg
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
 #
-# Configure Using Gemfile
-# gem 'pg'
-#
-development: &development
+development: &default
   adapter: postgresql
   encoding: unicode
   database: worker_playground_development
-  pool: 6
-  username: postgres
-  password:
-  host: db
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: railsuser
+  timeout: 5000
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: worker_playground_test
-  pool: 6
-  username: postgres
-  password:
-  host: db
 
 production:
-  <<: *development
+  <<: *default
   database: worker_playground_production
-  username: worker_playground
-  password: <%= ENV['WORKER_PLAYGROUND_DATABASE_PASSWORD'] %>
+  username: example
+  password: <%= ENV['EXAMPLE_DATABASE_PASSWORD'] %>

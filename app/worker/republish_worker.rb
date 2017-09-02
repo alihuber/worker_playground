@@ -1,7 +1,7 @@
 class RepublishWorker < Gundog::ApplicationWorker
 
   def call
-    puts "#{Time.zone.now.to_s}  processing #{json} with "\
+    puts "#{Time.zone.now.to_s} processing #{json} with "\
       "object #{self.object_id}"
     dataset_id  = json.to_i
     dataset     = Dataset.where(id: dataset_id).first

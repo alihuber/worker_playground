@@ -1,11 +1,11 @@
-ENV["RAILS_ENV"] ||= 'test'
+ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 
 require "rspec/rails"
 require "database_cleaner"
 
 require "capybara/rspec"
-require 'capybara/rails'
+require "capybara/rails"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -19,7 +19,7 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
   if config.files_to_run.one?
-    config.default_formatter = 'doc'
+    config.default_formatter = "doc"
   end
 
   config.before :suite do
